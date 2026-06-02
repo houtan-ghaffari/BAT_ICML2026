@@ -8,7 +8,7 @@ from requests.exceptions import ReadTimeout, ConnectionError
 from tqdm import tqdm
 
 
-def download_and_extract_bulletproof(target_dir='/home/Datasets/AudioSet', download_unbalanced=False):
+def download_and_extract(target_dir='/home/Datasets/AudioSet', download_unbalanced=False):
     target_dir = Path(target_dir)
     target_dir.mkdir(parents=True, exist_ok=True)
     repo_id = "confit/audioset-full"
@@ -117,4 +117,4 @@ def download_and_extract_bulletproof(target_dir='/home/Datasets/AudioSet', downl
 
 
 if __name__ == '__main__':
-    download_and_extract_bulletproof(download_unbalanced=False)
+    download_and_extract(download_unbalanced=False)
