@@ -1,0 +1,86 @@
+# ==========================================
+# System & Environment
+# ==========================================
+device: cuda
+train_num_workers: 48
+val_num_workers: 32
+test_num_workers: 0
+compile: true
+state_save_path: null
+save_model: false
+
+# ==========================================
+# Data & Features
+# ==========================================
+task: librispeech
+dataset_dir: null
+sr: 16000
+n_fft: 1024
+hop_length: 160
+frame_length: 25.0
+frame_shift: 10.0
+n_mels: 128
+f_min: 0
+time_frame_size: 0  # not required here, leave it at 0
+
+# ==========================================
+# Model Architecture
+# ==========================================
+model_name: BAT
+pretrained_path: pretrained_states/BAT_base.pt
+vit_size: b
+patch_size: 16
+dim: 768
+depth: 12
+num_heads: 12
+mlp_ratio: 4
+head: asr
+use_cls_in_head: false
+num_prototypes: 0
+num_vqt: 0
+frame_wise_task: true
+head_norm: true
+head_dropout: 0.2
+
+# ==========================================
+# Training & Optimization
+# ==========================================
+finetune: false
+train_batch_size: 64
+val_batch_size: 64
+val_frequency: 500
+test_batch_size: 1
+test_frequency: 0
+optimization_steps: 20000
+lr: 1.0e-3
+min_lr: 1.0e-6
+lr_layer_decay: null
+lr_warmup_steps: 500
+weight_decay: 0.05
+adam_beta1: 0.9
+adam_beta2: 0.999
+grad_accumulation_steps: 1
+grad_clip_norm: null
+use_asymmetric_loss: false
+
+# ==========================================
+# Augmentation & Regularization
+# ==========================================
+dropout: 0.0
+path_dropout_rate: 0.0
+label_smoothing: null
+lasso_weight: 0
+augment: false
+use_mixup: false
+mixup_chance: 0
+mixup_beta: 0
+mixup_hard_label: false
+use_random_gain: false
+use_color_noise: false
+color_noise_chance: 0
+use_time_roll: false
+use_tf_mask: false
+freq_mask_param: 0
+time_mask_param: 0
+tf_mask_repeats: 0
+mask_ratio: 0.0

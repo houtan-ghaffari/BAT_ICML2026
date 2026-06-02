@@ -1,0 +1,86 @@
+# ==========================================
+# System & Environment
+# ==========================================
+device: cuda
+train_num_workers: 48
+val_num_workers: 0
+test_num_workers: 32
+compile: true
+state_save_path: null
+save_model: true
+
+# ==========================================
+# Data & Features
+# ==========================================
+task: as20k
+dataset_dir: /home/acoust/hghaffar/Datasets/AudioSet
+sr: 16000
+n_fft: 1024
+hop_length: 160
+frame_length: 25.0  # legacy models used this
+frame_shift: 10.0  # legacy models used this
+n_mels: 128
+f_min: 0
+time_frame_size: 1024  # number of time frames after transforming the waveform into a spectrogram
+
+# ==========================================
+# Model Architecture
+# ==========================================
+model_name: BAT  # BAT, EAT, SSLAM, BEATs
+pretrained_path: pretrained_states/BAT_base.pt
+vit_size: null
+patch_size: 16
+dim: 768
+depth: 12
+num_heads: 12
+mlp_ratio: 4
+head: cgp
+use_cls_in_head: true
+num_prototypes: 10000
+num_vqt: 0
+frame_wise_task: false
+head_norm: false
+head_dropout: 0.2
+
+# ==========================================
+# Training & Optimization
+# ==========================================
+finetune: false
+train_batch_size: 48
+val_batch_size: 0
+val_frequency: 0
+test_frequency: 20000
+test_batch_size: 64
+optimization_steps: 20000
+lr: 1.0e-3
+min_lr: 1.0e-6
+lr_layer_decay: null
+lr_warmup_steps: 500
+weight_decay: 0.05
+adam_beta1: 0.9
+adam_beta2: 0.999
+grad_accumulation_steps: 1
+grad_clip_norm: null
+use_asymmetric_loss: true
+
+# ==========================================
+# Augmentation & Regularization
+# ==========================================
+dropout: 0.0
+path_dropout_rate: 0.0
+label_smoothing: null
+lasso_weight: 0
+augment: false
+use_mixup: false
+mixup_chance: 0
+mixup_beta: 0
+mixup_hard_label: false
+use_random_gain: false
+use_color_noise: false
+color_noise_chance: 0
+use_time_roll: false
+use_tf_mask: false
+freq_mask_param: 0
+time_mask_param: 0
+tf_mask_repeats: 0
+mask_ratio: 0.0

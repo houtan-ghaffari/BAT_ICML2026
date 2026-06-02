@@ -1,0 +1,85 @@
+# ==========================================
+# System & Environment
+# ==========================================
+device: cuda
+train_num_workers: 48
+val_num_workers: 32
+test_num_workers: 8
+compile: true
+state_save_path: null
+
+# ==========================================
+# Data & Features
+# ==========================================
+task: scv2
+dataset_dir: /home/acoust/hghaffar/Datasets/speech_commands_v2
+sr: 16000
+n_fft: 1024
+hop_length: 160
+frame_length: 25.0
+frame_shift: 10.0
+n_mels: 128
+f_min: 0
+time_frame_size: 112
+
+# ==========================================
+# Model Architecture
+# ==========================================
+model_name: BAT
+pretrained_path: /home/acoust/hghaffar/Projects/audio_ssl/tasks/pretrained_states/BATb.ckpt
+vit_size: null
+patch_size: 16
+dim: 768
+depth: 12
+num_heads: 12
+mlp_ratio: 4
+head: linear
+use_cls_in_head: true
+num_prototypes: 0
+num_vqt: 0
+frame_wise_task: false
+head_norm: true
+head_dropout: 0.0
+
+# ==========================================
+# Training & Optimization
+# ==========================================
+finetune: true
+train_batch_size: 256
+val_batch_size: 128
+val_frequency: 500
+test_batch_size: 128
+test_frequency: 10000
+optimization_steps: 10000
+lr: 5.0e-5
+min_lr: 1.0e-6
+lr_layer_decay: 0.75
+lr_warmup_steps: 1000
+weight_decay: 0.05
+adam_beta1: 0.9
+adam_beta2: 0.95
+grad_accumulation_steps: 1
+grad_clip_norm: null
+use_asymmetric_loss: false
+
+# ==========================================
+# Augmentation & Regularization
+# ==========================================
+dropout: 0.0
+path_dropout_rate: 0.1
+label_smoothing: null
+lasso_weight: 0
+augment: true
+use_mixup: false
+mixup_chance: 0
+mixup_beta: 0
+mixup_hard_label: false
+use_random_gain: false
+use_color_noise: true
+color_noise_chance: 0.3
+use_time_roll: true
+use_tf_mask: true
+freq_mask_param: 16
+time_mask_param: 32
+tf_mask_repeats: 1
+mask_ratio: 0.0

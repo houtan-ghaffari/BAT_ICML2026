@@ -1,0 +1,86 @@
+# ==========================================
+# System & Environment
+# ==========================================
+device: cuda
+train_num_workers: 11
+val_num_workers: 4
+test_num_workers: 0
+compile: true
+state_save_path: null
+save_model: true
+
+# ==========================================
+# Data & Features
+# ==========================================
+task: dcase2016_task2
+dataset_dir: /home/acoust/hghaffar/Datasets/HEAR/hear2021-dcase2016_task2-hear2021-full-48000/hear-2021.0.6/tasks/dcase2016_task2-hear2021-full
+sr: 16000
+n_fft: 1024
+hop_length: 160
+frame_length: 25.0
+frame_shift: 10.0
+n_mels: 128
+f_min: 0
+time_frame_size: 12000
+
+# ==========================================
+# Model Architecture
+# ==========================================
+model_name: BAT
+pretrained_path: pretrained_states/BAT_base.pt
+vit_size: null
+patch_size: 16
+dim: 768
+depth: 12
+num_heads: 12
+mlp_ratio: 4
+head: linear
+use_cls_in_head: true
+num_prototypes: 0
+num_vqt: 0
+frame_wise_task: true
+head_norm: true
+head_dropout: 0.2
+
+# ==========================================
+# Training & Optimization
+# ==========================================
+finetune: true
+train_batch_size: 4
+val_batch_size: 4
+val_frequency: 50
+test_batch_size: 0
+test_frequency: 0
+optimization_steps: 4000
+lr: 5.0e-5
+min_lr: 1.0e-6
+lr_layer_decay: 0.75
+lr_warmup_steps: 400
+weight_decay: 0.05
+adam_beta1: 0.9
+adam_beta2: 0.95
+grad_accumulation_steps: 1
+grad_clip_norm: null
+use_asymmetric_loss: false
+
+# ==========================================
+# Augmentation & Regularization
+# ==========================================
+dropout: 0.0
+path_dropout_rate: 0.1
+label_smoothing: null
+lasso_weight: 0
+augment: true
+use_mixup: true
+mixup_chance: 0.9
+mixup_beta: 0.8
+mixup_hard_label: false
+use_random_gain: false
+use_color_noise: true
+color_noise_chance: 0.3
+use_time_roll: false
+use_tf_mask: true
+freq_mask_param: 16
+time_mask_param: 64
+tf_mask_repeats: 2
+mask_ratio: 0.0

@@ -1,0 +1,54 @@
+# ==========================================
+# System & Environment
+# ==========================================
+device: cuda
+num_workers: 48
+compile: true
+state_save_path: null
+save_interval: null
+
+# ==========================================
+# Data & Features
+# ==========================================
+dataset_dir: /home/acoust/hghaffar/Datasets/AudioSet/unbalanced_segments
+sr: 16000
+n_fft: 1024
+hop_length: 160
+n_mels: 128
+time_frame_size: 1024  # number of time frames after transforming the waveform into a spectrogram
+
+# ==========================================
+# Model Architecture
+# ==========================================
+patch_size: 16
+dim: 768
+depth: 12
+num_heads: 12
+mlp_ratio: 4
+decoder_depth: 6
+decoder_heads: 12
+decoder_mlp_ratio: 4
+decoder_dim: 768
+
+# ==========================================
+# Training & Optimization
+# ==========================================
+batch_size: 24
+optimization_steps: 400000
+lr: 5.0e-4
+min_lr: 1.0e-6
+lr_warmup_steps: 53000
+weight_decay: 0.05
+adam_beta1: 0.9
+adam_beta2: 0.95
+ema_warmup_steps: 100000
+ema_decay_start: 0.9998
+ema_decay_end: 0.99999
+grad_accumulation_steps: 4  # this simulates larger batch size on a single GPU; 24*4 = 96;
+clip_norm: null  # gradient clip norm
+
+# ==========================================
+# Augmentation & Regularization
+# ==========================================
+mask_ratio: 0.8
+num_views: 16
