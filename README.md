@@ -26,6 +26,53 @@ pip install librosa datasets==3.6.0 sed_eval jiwer scikit-learn pandas tqdm scip
 
 ---
 
+## Pretrained Weights
+
+We release the pretrained BAT ViT-B/16 encoder on Hugging Face:
+
+**https://huggingface.co/lrauch/BAT-vit-b16-pretrainedAS2M**
+
+There are two main ways to use the release.
+
+### 1. Load the Hugging Face model directly
+
+```python
+import torch
+from transformers import AutoModel
+
+model = AutoModel.from_pretrained(
+    "lrauch/BAT-vit-b16-pretrainedAS2M",
+    trust_remote_code=True,
+).eval()
+
+features = torch.randn(2, 1, 1024, 128)
+
+with torch.no_grad():
+    outputs = model(input_features=features)
+```
+
+### 2. Download only the checkpoint weights
+
+If you want to integrate the pretrained encoder weights into your own codebase (or here), download the raw `model.safetensors` file:
+
+```python
+from huggingface_hub import hf_hub_download
+from safetensors.torch import load_file
+
+weights_path = hf_hub_download(
+    repo_id="lrauch/BAT-vit-b16-pretrainedAS2M",
+    filename="model.safetensors",
+)
+
+state_dict = load_file(weights_path, device="cpu")
+print(state_dict.keys())
+```
+
+
+
+
+---
+
 ## Data
 * Download these datasets manually:
   * [Speech Commands](http://download.tensorflow.org/data/speech_commands_v0.02.tar.gz)
