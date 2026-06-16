@@ -44,7 +44,7 @@ adam_beta2: 0.95
 ema_warmup_steps: 100000
 ema_decay_start: 0.9998
 ema_decay_end: 0.99999
-grad_accumulation_steps: 4  # this simulates larger batch size on a single GPU; 24*4 = 96;
+grad_accumulation_steps: 1  # this simulates larger batch size on a single GPU; e.g., 24*4 = 96;
 clip_norm: null  # gradient clip norm
 
 # ==========================================
