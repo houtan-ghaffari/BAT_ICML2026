@@ -74,10 +74,13 @@ def smooth_binary_targets(targets: torch.Tensor, smoothing: float = 0.0) -> torc
 
 
 def infinite_batch_iterator(data_loader: Iterable) -> Iterator:
-    """Yields batches indefinitely from the provided data loader."""
+    epoch = 0
     while True:
+        if hasattr(data_loader, 'sampler') and hasattr(data_loader.sampler, 'set_epoch'):
+            data_loader.sampler.set_epoch(epoch)
         for batch in data_loader:
             yield batch
+        epoch += 1
 
 
 def seed_everything(default_seed: int = 32) -> None:
